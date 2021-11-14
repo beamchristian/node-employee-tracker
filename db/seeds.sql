@@ -25,5 +25,4 @@ VALUES
 ('Dora', 'Carrington', 2, 1),
 ('Edward', 'Bellamy', 3, 2),
 ('Montague', 'Summers', 8, 3),
-('Octavia', 'Butler', 5, 3),
-('Unica', 'Zurn', 4, 4);
+('Octavia', 'Butler', 5, 3);
