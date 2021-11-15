@@ -1,3 +1,4 @@
+'use strict';
 const db = require('./db/connection');
 const inquirer = require('inquirer');
 const cTable = require('console.table');
@@ -6,23 +7,25 @@ const { allowedNodeEnvironmentFlags } = require('process');
 promptQuestions();
 
 function promptQuestions() {
-  return inquirer
-    .prompt({
-      type: 'list',
-      choices: [
-        'View all Employees',
-        'View all Employees By Department',
-        'View all Roles',
-        'Add Employee',
-        'Add Role',
-        'Add Department',
-        'Update Employee role',
-        'Remove Employee',
-        'Quit',
-      ],
-      message: 'What would you like to do?',
-      name: 'option',
-    })
+  inquirer
+    .prompt([
+      {
+        type: 'list',
+        message: 'What would you like to do?',
+        name: 'option',
+        choices: [
+          'View all Employees',
+          'View all Employees By Department',
+          'View all Roles',
+          'Add Employee',
+          'Add Role',
+          'Add Department',
+          'Update Employee role',
+          'Remove Employee',
+          'Quit',
+        ],
+      },
+    ])
     .then(answer => {
       switch (answer.option) {
         case 'View all Employees':

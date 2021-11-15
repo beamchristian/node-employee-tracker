@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "console.table": "^0.10.0",
+    "easy-table": "^1.2.0",
     "inquirer": "^8.2.0",
     "mysql2": "^2.3.3"
   },
