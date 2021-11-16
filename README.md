@@ -20,11 +20,15 @@ This application is covered under the MIT License.
 
 ## Video
 
-[Video of usage](https://watch.screencastify.com/v/hPBiQIGS2lIJ13HLCTKr)
+[Video of usage](https://watch.screencastify.com/v/TVJxjhwcLg4VzHXnr6ht)
+
+## Screenshots
+
+![Employeetracker screenshot](https://user-images.githubusercontent.com/88356270/142045330-e99573f6-1803-4a07-8a5a-da1a8ea6da58.png)
 
 ## Installation
 
-run the following in the command line:
+run the following in the terminal:
 
 ```md
 npm install mysql2
@@ -42,7 +46,28 @@ in terminal
 
 ## Usage
 
-type node index in the command line at the applications root directory
+- Navigate to db/connection.js and input your my sql user and password,
+- run database, schema, and seeds files by running the follow commands in mysql shell:
+
+```md
+source db/db.sql
+```
+
+```md
+source db/schema.sql
+```
+
+```md
+source db/seeds.sql
+```
+
+- Navigate to the root directory of the project and type in terminal:
+
+```md
+node index
+```
+
+- Then navigate through the prompts
 
 ## Credits
 
