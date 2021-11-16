@@ -21,9 +21,14 @@ const db = mysql.createConnection(
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// Get all candidates
+// Get all employees
 app.get('/api/employee', (req, res) => {
-  const sql = `SELECT * FROM employee`;
+  const sql = `SELECT employee.*, roles.title 
+               AS title, 
+               roles.salary 
+               AS salary
+               FROM employee
+               LEFT JOIN roles ON employee.role_id = roles.id`;
 
   db.query(sql, (err, rows) => {
     if (err) {
@@ -39,7 +44,14 @@ app.get('/api/employee', (req, res) => {
 
 // GET a single employee
 app.get('/api/employee/:id', (req, res) => {
-  const sql = `SELECT * FROM employee WHERE id = ?`;
+  const sql = `SELECT employee.*, roles.title 
+               AS title, 
+               roles.salary 
+               AS salary
+               FROM employee
+               LEFT JOIN roles
+               ON employee.role_id = roles.id
+               WHERE employee.id = ?`;
   const params = [req.params.id];
 
   db.query(sql, params, (err, row) => {
@@ -95,6 +107,56 @@ app.post('/api/employee', ({ body }, res) => {
       message: 'success',
       data: body,
     });
+  });
+});
+// all roles
+app.get('/api/roles', (req, res) => {
+  const sql = `SELECT * FROM roles`;
+  db.query(sql, (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json({
+      message: 'success',
+      data: rows,
+    });
+  });
+});
+// single role
+app.get('/api/roles/:id', (req, res) => {
+  const sql = `SELECT * FROM roles WHERE id =?`;
+  const params = [req.params.id];
+  db.query(sql, params, (err, rows) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    res.json({
+      message: 'success',
+      data: rows,
+    });
+  });
+});
+
+app.delete('/api/roles/:id', (req, res) => {
+  const sql = `DELETE FROM roles WHERE id = ?`;
+  const params = [req.params.id];
+  db.query(sql, params, (err, result) => {
+    if (err) {
+      res.status(400).json({ error: res.message });
+      // checks if anything was deleted
+    } else if (!result.affectedRows) {
+      res.json({
+        message: 'role not found',
+      });
+    } else {
+      res.json({
+        message: 'deleted',
+        changes: result.affectedRows,
+        id: req.params.id,
+      });
+    }
   });
 });
 

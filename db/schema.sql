@@ -21,5 +21,4 @@ last_name VARCHAR(30) NOT NULL,
 role_id INTEGER NOT NULL,
 manager_id INTEGER,
 CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES Roles(id) ON DELETE CASCADE
-
 );
